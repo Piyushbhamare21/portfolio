@@ -1,11 +1,23 @@
-                                                                            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piyush Vishwajit Bhamare | Mechanical & Manufacturing Engineer</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Piyush Bhamare | Mechanical & Process Engineering Portfolio</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Teko:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome & Tailwind -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -13,534 +25,382 @@
                 extend: {
                     colors: {
                         industrial: {
-                            50: '#f4f6f8',
-                            100: '#e5e9f0',
-                            200: '#cdd5e1',
-                            300: '#a7b6cb',
-                            400: '#7991b0',
-                            500: '#587297',
-                            600: '#435879',
-                            700: '#364661',
-                            800: '#2d3b51',
-                            900: '#1e2638',
-                            950: '#0f141f',
+                            950: '#06090e',
+                            900: '#0b1017',
+                            800: '#141c27',
+                            700: '#1e293b',
+                            400: '#38bdf8',
                         },
-                        amberAccent: '#f59e0b',
-                        cyanAccent: '#06b6d4',
+                        accent: {
+                            cyan: '#00f2fe',
+                            amber: '#f59e0b',
+                            emerald: '#10b981',
+                        }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Teko', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .font-mono-tech { font-family: 'JetBrains Mono', monospace; }
+        body {
+            background-color: #06090e;
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(14, 21, 32, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-panel-hover:hover {
+            border-color: rgba(0, 242, 254, 0.4);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .text-glow-cyan {
+            text-shadow: 0 0 12px rgba(0, 242, 254, 0.5);
+        }
+
         .grid-bg {
             background-size: 30px 30px;
             background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         }
-        .light .grid-bg {
-            background-image: 
-                linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-        }
-        .glass-panel {
-            background: rgba(30, 38, 56, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .light .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-        }
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px -10px rgba(6, 182, 212, 0.15);
-        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0f141f;
-        }
-        .light ::-webkit-scrollbar-track {
-            background: #f4f6f8;
+            background: #06090e;
         }
         ::-webkit-scrollbar-thumb {
-            background: #364661;
+            background: #1e293b;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #06b6d4;
+            background: #00f2fe;
         }
     </style>
 </head>
-<body class="bg-industrial-950 text-slate-100 transition-colors duration-300 antialiased min-h-screen selection:bg-cyan-500 selection:text-slate-950">
+<body class="selection:bg-cyan-500 selection:text-black">
 
-    <!-- NAVIGATION BAR -->
-    <nav class="fixed top-0 left-0 w-full z-40 glass-panel border-b border-industrial-800/50 px-4 lg:px-8 py-3 transition-all duration-300">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="#hero" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-slate-950 text-xl tracking-tighter shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-center text-cyan-400 font-display text-2xl font-bold group-hover:scale-105 transition">
                     PB
                 </div>
                 <div>
-                    <span class="font-bold tracking-tight text-lg block text-slate-100 group-hover:text-cyan-400 transition-colors">Piyush Bhamare</span>
-                    <span class="text-xs text-cyan-400 font-mono-tech block -mt-1">Mechanical &amp; Mfg Engineer</span>
+                    <span class="font-display text-2xl font-bold tracking-wide text-white block leading-none">PIYUSH BHAMARE</span>
+                    <span class="text-[10px] font-mono text-cyan-400 uppercase tracking-wider block mt-1">Mechanical & Process Engineer</span>
                 </div>
             </a>
 
-            <!-- Desktop Links -->
-            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
-                <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
-                <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
-                <a href="#experience" class="hover:text-cyan-400 transition-colors">Experience</a>
-                <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
-                <a href="#education" class="hover:text-cyan-400 transition-colors">Education</a>
+            <div class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest text-slate-300">
+                <a href="#about" class="hover:text-cyan-400 transition">About</a>
+                <a href="#engine-demo" class="hover:text-cyan-400 transition">3D Cycle</a>
+                <a href="#skills" class="hover:text-cyan-400 transition">Competencies</a>
+                <a href="#experience" class="hover:text-cyan-400 transition">Experience</a>
+                <a href="#projects" class="hover:text-cyan-400 transition">Projects</a>
+                <a href="#education" class="hover:text-cyan-400 transition">Credentials</a>
             </div>
 
-            <div class="flex items-center space-x-4">
-                <!-- Theme Toggle -->
-                <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2.5 rounded-lg bg-industrial-800 text-slate-300 hover:text-white hover:bg-industrial-700 transition-all border border-industrial-700" title="Toggle Light/Dark Theme">
-                    <i class="fa-solid fa-moon text-cyan-400 dark:inline hidden"></i>
-                    <i class="fa-solid fa-sun text-amber-400 dark:hidden inline"></i>
-                </button>
-
-                <!-- Resume Button -->
-                <button onclick="openModal('resumeModal')" class="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500 hover:text-slate-950 transition-all shadow-sm">
-                    <i class="fa-solid fa-file-pdf"></i>
-                    <span>Resume</span>
-                </button>
-
-                <!-- Mobile Menu Button -->
-                <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-lg bg-industrial-800 text-slate-300">
-                    <i class="fa-solid fa-bars text-lg"></i>
-                </button>
+            <div class="flex items-center gap-4">
+                <a href="resume.pdf.pdf" target="_blank" download class="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-mono text-xs font-bold uppercase tracking-wider rounded transition flex items-center gap-2">
+                    <i class="fa-solid fa-file-pdf"></i> Resume PDF
+                </a>
             </div>
-        </div>
-
-        <!-- Mobile Drawer Menu -->
-        <div id="mobileMenu" class="hidden md:hidden pt-4 pb-2 border-t border-industrial-800 mt-3 space-y-3">
-            <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-industrial-800 text-slate-300">About</a>
-            <a href="#skills" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-industrial-800 text-slate-300">Skills</a>
-            <a href="#experience" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-industrial-800 text-slate-300">Experience</a>
-            <a href="#projects" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-industrial-800 text-slate-300">Projects</a>
-            <a href="#education" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-industrial-800 text-slate-300">Education</a>
-            <button onclick="openModal('resumeModal'); toggleMobileMenu();" class="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/40">
-                <i class="fa-solid fa-file-pdf"></i> View Resume
-            </button>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section id="hero" class="relative pt-32 pb-20 md:pt-44 md:pb-32 grid-bg overflow-hidden border-b border-industrial-800/80">
-        <div class="absolute top-1/4 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-10 right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- Hero Section -->
+    <section id="about" class="relative min-h-screen pt-28 pb-20 flex items-center grid-bg overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Info -->
+            <div class="lg:col-span-7 z-10 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                    OPEN TO MECHANICAL / PROCESS / MANUFACTURING ROLES (US)
+                </div>
 
-        <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-industrial-800/90 border border-industrial-700 text-xs font-mono-tech text-cyan-400">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                        <span>Boston, MA &bull; Available for Opportunities</span>
+                <h1 class="font-display text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white uppercase leading-none">
+                    LEAN PROCESS. <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-amber-400">PRECISION CAD.</span>
+                </h1>
+
+                <p class="text-slate-300 text-lg leading-relaxed max-w-2xl font-light">
+                    Mechanical Engineer with hands-on expertise in manufacturing process optimization, injection molding, vision system calibration, root cause analysis (8D/5 Whys), GD&T, and Lean Manufacturing. Proven track record of improving OEE, cutting scrap costs, and validating production processes.
+                </p>
+
+                <!-- Quick Metrics Grid -->
+                <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-800 font-mono">
+                    <div>
+                        <div class="text-3xl font-bold text-cyan-400 font-display">$87K+</div>
+                        <div class="text-xs text-slate-400">Annual Scrap Savings</div>
                     </div>
-
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                        Piyush Vishwajit <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Bhamare</span>
-                    </h1>
-
-                    <p class="text-xl font-medium text-slate-300">
-                        Mechanical &amp; Manufacturing Engineer <span class="text-cyan-400">|</span> Process Optimization &amp; Automation Specialist
-                    </p>
-
-                    <p class="text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed">
-                        M.S. in Mechanical Engineering graduate with hands-on experience in process validation, GD&amp;T, root cause analysis (8D, 5 Whys), SCADA/MES integration, FEA topology optimization, and automated vision systems.
-                    </p>
-
-                    <div class="flex flex-wrap gap-4 pt-4">
-                        <a href="#projects" class="px-6 py-3.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold text-sm hover:brightness-110 shadow-lg shadow-cyan-500/20 transition-all flex items-center gap-2">
-                            <span>View Projects</span>
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                        <button onclick="openModal('contactModal')" class="px-6 py-3.5 rounded-lg bg-industrial-800 hover:bg-industrial-700 text-slate-200 font-semibold text-sm border border-industrial-700 transition-all flex items-center gap-2">
-                            <i class="fa-solid fa-envelope text-amber-400"></i>
-                            <span>Contact Me</span>
-                        </button>
-                        <button onclick="openModal('resumeModal')" class="px-6 py-3.5 rounded-lg bg-industrial-900 hover:bg-industrial-800 text-cyan-400 font-semibold text-sm border border-cyan-500/30 transition-all flex items-center gap-2">
-                            <i class="fa-solid fa-file-pdf"></i>
-                            <span>Download Resume</span>
-                        </button>
+                    <div>
+                        <div class="text-3xl font-bold text-amber-400 font-display">+20%</div>
+                        <div class="text-xs text-slate-400">Molding Output Gain</div>
                     </div>
-
-                    <!-- Core Stack Badge Pills -->
-                    <div class="pt-6 border-t border-industrial-800/80 flex flex-wrap items-center gap-2.5 text-xs text-slate-400 font-mono-tech">
-                        <span class="text-slate-500 font-semibold uppercase mr-1">Core Stack:</span>
-                        <span class="px-2.5 py-1 rounded bg-industrial-900 border border-industrial-800">SolidWorks (CSWA)</span>
-                        <span class="px-2.5 py-1 rounded bg-industrial-900 border border-industrial-800">ANSYS FEA</span>
-                        <span class="px-2.5 py-1 rounded bg-industrial-900 border border-industrial-800">MATLAB / Simulink</span>
-                        <span class="px-2.5 py-1 rounded bg-industrial-900 border border-industrial-800">8D &amp; 5 Whys</span>
-                        <span class="px-2.5 py-1 rounded bg-industrial-900 border border-industrial-800">SCADA / MES</span>
+                    <div>
+                        <div class="text-3xl font-bold text-emerald-400 font-display">15%</div>
+                        <div class="text-xs text-slate-400">False Reject Reduction</div>
                     </div>
                 </div>
 
-                <!-- Industrial Blueprints / Stats Interactive Card -->
-                <div class="lg:col-span-5">
-                    <div class="glass-panel p-6 rounded-2xl relative border border-industrial-700/60 shadow-2xl overflow-hidden group">
-                        <div class="absolute -top-12 -right-12 w-40 h-40 bg-cyan-500/10 rounded-full blur-2xl"></div>
-                        <div class="flex items-center justify-between pb-4 border-b border-industrial-800 font-mono-tech text-xs text-slate-400">
-                            <span class="flex items-center gap-2"><i class="fa-solid fa-microchip text-cyan-400"></i> ENG_PROFILE_SUMMARY.CAD</span>
-                            <span class="text-emerald-400">● VERIFIED CREDENTIALS</span>
-                        </div>
+                <!-- Call to action buttons -->
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="mailto:piyushbhamare2111@gmail.com" class="px-6 py-3.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold font-mono text-sm uppercase tracking-wider rounded transition flex items-center gap-2">
+                        <i class="fa-solid fa-envelope"></i> Contact Me
+                    </a>
+                    <a href="tel:+16175900193" class="px-6 py-3.5 glass-panel hover:bg-slate-800 text-slate-200 font-mono text-sm rounded transition flex items-center gap-2 border border-slate-700">
+                        <i class="fa-solid fa-phone text-cyan-400"></i> +1 (617) 590-0193
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="px-4 py-3.5 glass-panel hover:bg-slate-800 text-slate-300 rounded transition flex items-center justify-center border border-slate-700">
+                        <i class="fa-brands fa-linkedin text-lg"></i>
+                    </a>
+                </div>
+            </div>
 
-                        <div class="my-6 space-y-3.5 font-mono-tech text-xs">
-                            <div class="p-3 bg-industrial-950/80 rounded border border-industrial-800 flex justify-between items-center">
-                                <span class="text-slate-400">HIGHEST DEGREE:</span>
-                                <span class="text-slate-100 font-bold">M.S. Mechanical Eng @ Northeastern</span>
-                            </div>
-                            <div class="p-3 bg-industrial-950/80 rounded border border-industrial-800 flex justify-between items-center">
-                                <span class="text-slate-400">SPECIALIZATION:</span>
-                                <span class="text-cyan-400 font-semibold">Process Validation &amp; Quality</span>
-                            </div>
-                            <div class="p-3 bg-industrial-950/80 rounded border border-industrial-800 flex justify-between items-center">
-                                <span class="text-slate-400">KEY METRICS:</span>
-                                <span class="text-amber-400 font-semibold">18% Reject Reduction | 14% Cycle Time Cut</span>
-                            </div>
-                            <div class="p-3 bg-industrial-950/80 rounded border border-industrial-800 flex justify-between items-center">
-                                <span class="text-slate-400">LOCATION:</span>
-                                <span class="text-slate-200">Boston, MA, United States</span>
-                            </div>
-                        </div>
+            <!-- Right 3D Interactive Meshing Gear Train -->
+            <div class="lg:col-span-5 h-[450px] relative rounded-2xl glass-panel border border-slate-800 overflow-hidden group">
+                <div class="absolute top-4 left-4 z-10 text-xs font-mono text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <i class="fa-solid fa-gear text-cyan-400 animate-spin"></i> Interactive 3D Gear Train Simulation
+                </div>
+                <div id="gear-canvas-container" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
+                <div class="absolute bottom-4 left-4 right-4 z-10 flex justify-between text-[11px] font-mono text-slate-400 glass-panel px-3 py-1.5 rounded">
+                    <span><i class="fa-solid fa-hand-pointer text-cyan-400"></i> Drag to Orbit</span>
+                    <span class="text-cyan-400">Real-time Three.js Canvas</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                        <div class="grid grid-cols-3 gap-2 text-center pt-2">
-                            <div class="p-2.5 rounded bg-industrial-900/80 border border-industrial-800">
-                                <div class="text-lg font-bold text-cyan-400">3+</div>
-                                <div class="text-[10px] text-slate-400 uppercase font-mono-tech">Industry Roles</div>
-                            </div>
-                            <div class="p-2.5 rounded bg-industrial-900/80 border border-industrial-800">
-                                <div class="text-lg font-bold text-amber-400">5+</div>
-                                <div class="text-[10px] text-slate-400 uppercase font-mono-tech">Major Projects</div>
-                            </div>
-                            <div class="p-2.5 rounded bg-industrial-900/80 border border-industrial-800">
-                                <div class="text-lg font-bold text-emerald-400">CSWA</div>
-                                <div class="text-[10px] text-slate-400 uppercase font-mono-tech">Certified CSWA-SD</div>
-                            </div>
+    <!-- 3D Engine Stroke Demonstration Section -->
+    <section id="engine-demo" class="py-20 border-t border-slate-800 bg-industrial-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">// Interactive Simulation</span>
+                <h2 class="font-display text-4xl sm:text-5xl font-bold uppercase text-white tracking-wide mt-1">
+                    4-STROKE ENGINE THERMODYNAMIC CYCLE
+                </h2>
+                <p class="text-slate-400 text-sm font-mono mt-2">
+                    Interactive 3D model of internal combustion stroke mechanics with crank angle kinematics.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 items-center glass-panel p-6 rounded-2xl border border-slate-800">
+                <!-- 3D Viewport -->
+                <div class="lg:col-span-8 h-[500px] relative rounded-xl bg-industrial-950 overflow-hidden border border-slate-800">
+                    <div id="engine-canvas-container" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
+                    
+                    <!-- Cycle Info Overlay -->
+                    <div class="absolute top-4 left-4 z-10 glass-panel p-4 rounded-lg border border-cyan-500/30 max-w-xs">
+                        <div id="stroke-title" class="font-display text-3xl font-bold text-cyan-400 uppercase leading-none">INTAKE STROKE</div>
+                        <p id="stroke-desc" class="text-xs text-slate-300 mt-2 font-mono">
+                            Intake valve opens. Piston moves downward, drawing air-fuel mixture into the cylinder bore.
+                        </p>
+                        <div class="mt-3 pt-2 border-t border-slate-800 flex justify-between items-center text-xs font-mono">
+                            <span class="text-slate-400">Crank Angle:</span>
+                            <span id="crank-angle-readout" class="text-amber-400 font-bold">0°</span>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Controls & State Selection -->
+                <div class="lg:col-span-4 space-y-4 font-mono">
+                    <div class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Select Cycle Phase</div>
+                    
+                    <button onclick="setEngineStroke('intake')" id="btn-intake" class="w-full p-4 rounded-xl border border-cyan-500/50 bg-cyan-500/10 text-left hover:bg-cyan-500/20 transition flex justify-between items-center group">
+                        <div>
+                            <div class="text-cyan-400 font-bold text-sm">1. INTAKE</div>
+                            <div class="text-[11px] text-slate-400">Intake open, exhaust closed</div>
+                        </div>
+                        <i class="fa-solid fa-arrow-down text-cyan-400 group-hover:translate-y-1 transition"></i>
+                    </button>
+
+                    <button onclick="setEngineStroke('compression')" id="btn-compression" class="w-full p-4 rounded-xl border border-slate-800 bg-industrial-900 text-left hover:bg-slate-800 transition flex justify-between items-center group">
+                        <div>
+                            <div class="text-white font-bold text-sm">2. COMPRESSION</div>
+                            <div class="text-[11px] text-slate-400">Both valves closed, upward stroke</div>
+                        </div>
+                        <i class="fa-solid fa-compress text-slate-400"></i>
+                    </button>
+
+                    <button onclick="setEngineStroke('power')" id="btn-power" class="w-full p-4 rounded-xl border border-slate-800 bg-industrial-900 text-left hover:bg-slate-800 transition flex justify-between items-center group">
+                        <div>
+                            <div class="text-amber-400 font-bold text-sm">3. POWER / COMBUSTION</div>
+                            <div class="text-[11px] text-slate-400">Spark ignition, rapid expansion</div>
+                        </div>
+                        <i class="fa-solid fa-fire text-amber-400"></i>
+                    </button>
+
+                    <button onclick="setEngineStroke('exhaust')" id="btn-exhaust" class="w-full p-4 rounded-xl border border-slate-800 bg-industrial-900 text-left hover:bg-slate-800 transition flex justify-between items-center group">
+                        <div>
+                            <div class="text-emerald-400 font-bold text-sm">4. EXHAUST</div>
+                            <div class="text-[11px] text-slate-400">Exhaust valve open, purging gases</div>
+                        </div>
+                        <i class="fa-solid fa-wind text-emerald-400"></i>
+                    </button>
+
+                    <!-- Speed & Pause controls -->
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                        <button onclick="toggleEnginePause()" id="engine-pause-btn" class="px-4 py-2 glass-panel hover:bg-slate-800 text-xs rounded text-slate-200">
+                            <i class="fa-solid fa-pause"></i> Pause Cycle
+                        </button>
+                        <div class="text-xs text-slate-400">Speed: 1x</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEARCH & FILTER BAR -->
-    <div class="bg-industrial-900/90 border-b border-industrial-800 py-4 sticky top-16 z-30 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="relative w-full sm:w-96">
-                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
-                <input id="globalSearchInput" onkeyup="handleGlobalSearch()" type="text" placeholder="Search skills, tools, or projects (e.g. GD&T, FEA, SCADA)..." class="w-full pl-10 pr-4 py-2 rounded-lg bg-industrial-950 border border-industrial-700 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500">
-            </div>
-            <div class="text-xs font-mono-tech text-slate-400 hidden lg:block">
-                <span>Filter matrix active &bull; Dynamic engineering search enabled</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- ABOUT SECTION -->
-    <section id="about" class="py-16 border-b border-industrial-800/80">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8">
-            <div class="grid lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-8 space-y-4">
-                    <h2 class="text-xs font-mono-tech text-cyan-400 uppercase tracking-widest">// EXECUTIVE OVERVIEW</h2>
-                    <h3 class="text-3xl font-extrabold text-white">Engineering Philosophy &amp; Background</h3>
-                    <p class="text-slate-300 leading-relaxed text-base">
-                        Engineered with a strong cross-functional background in mechanical design, statistical process control, and automated quality verification. Proven track record at <span class="text-slate-100 font-semibold">Mylan Laboratories</span> and <span class="text-slate-100 font-semibold">Shivkrupa Techno-Plast</span> in executing root cause investigations, optimizing injection molding cycle times, calibrating vision systems, and maintaining strict cGMP compliance.
-                    </p>
-                    <p class="text-slate-400 leading-relaxed text-sm">
-                        Currently completing my Master of Science in Mechanical Engineering at Northeastern University in Boston, focusing on advanced multi-body dynamics, state-space control systems, micro/nanoscale additive manufacturing, and FEA topology optimization.
-                    </p>
+    <!-- Technical Competencies -->
+    <section id="skills" class="py-20 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">// Core Capabilities</span>
+                    <h2 class="font-display text-4xl sm:text-5xl font-bold uppercase text-white tracking-wide mt-1">ENGINEERING MATRIX</h2>
                 </div>
-                <div class="lg:col-span-4 glass-panel p-6 rounded-xl border border-industrial-800 space-y-3 text-xs font-mono-tech">
-                    <div class="text-slate-300 font-bold border-b border-industrial-800 pb-2">CORE METHODOLOGIES</div>
-                    <div class="flex items-center gap-2 text-slate-300"><i class="fa-solid fa-check text-cyan-400"></i> GD&amp;T &amp; ASME Y14.5 Standards</div>
-                    <div class="flex items-center gap-2 text-slate-300"><i class="fa-solid fa-check text-cyan-400"></i> 8D Report &amp; 5 Whys RCA</div>
-                    <div class="flex items-center gap-2 text-slate-300"><i class="fa-solid fa-check text-cyan-400"></i> Process Validation (IQ / OQ / PQ)</div>
-                    <div class="flex items-center gap-2 text-slate-300"><i class="fa-solid fa-check text-cyan-400"></i> Lean Manufacturing &amp; Line Balancing</div>
-                    <div class="flex items-center gap-2 text-slate-300"><i class="fa-solid fa-check text-cyan-400"></i> Statistical Process Control (SPC / Cp / Cpk)</div>
+                <div class="mt-4 md:mt-0 font-mono text-xs text-slate-400">
+                    Category Filter: <span class="text-cyan-400">All Technical Domains</span>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- CORE SKILLS / COMPETENCIES -->
-    <section id="skills" class="py-20 border-b border-industrial-800/80">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8">
-            <div class="max-w-3xl mb-12">
-                <h2 class="text-xs font-mono-tech text-cyan-400 uppercase tracking-widest mb-2">// TECHNICAL PROFICIENCY</h2>
-                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Core Skills &amp; Competencies</h3>
-                <p class="text-slate-400 mt-3">Categorized technical toolsets and engineering methodologies.</p>
-            </div>
-
-            <!-- Skill Tabs -->
-            <div class="flex flex-wrap gap-2 mb-8 border-b border-industrial-800 pb-4">
-                <button onclick="filterSkills('all')" class="skill-tab-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all bg-cyan-500 text-slate-950 font-bold" data-category="all">
-                    All Competencies
-                </button>
-                <button onclick="filterSkills('mfg')" class="skill-tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-industrial-800 text-slate-300 hover:bg-industrial-700" data-category="mfg">
-                    <i class="fa-solid fa-industry text-amber-400 mr-2"></i>Manufacturing &amp; Process
-                </button>
-                <button onclick="filterSkills('design')" class="skill-tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-industrial-800 text-slate-300 hover:bg-industrial-700" data-category="design">
-                    <i class="fa-solid fa-cubes text-cyan-400 mr-2"></i>Design &amp; CAD
-                </button>
-                <button onclick="filterSkills('sim')" class="skill-tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-industrial-800 text-slate-300 hover:bg-industrial-700" data-category="sim">
-                    <i class="fa-solid fa-chart-line text-emerald-400 mr-2"></i>Simulation &amp; Controls
-                </button>
-            </div>
-
-            <!-- Skills Grid -->
-            <div id="skillsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- Category 1: Manufacturing & Process -->
-                <div class="skill-card card-hover glass-panel p-6 rounded-xl border border-industrial-800" data-cat="mfg" data-keywords="gd&t datum root cause 8d 5 whys validation quality inspection">
-                    <div class="w-12 h-12 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4 border border-amber-500/20">
-                        <i class="fa-solid fa-ruler-combined"></i>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Skill Card 1 -->
+                <div class="glass-panel p-6 rounded-xl border border-slate-800 glass-panel-hover transition">
+                    <div class="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-industry"></i>
                     </div>
-                    <h4 class="text-lg font-bold text-white mb-2">GD&amp;T &amp; ASME Y14.5</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Geometric Dimensioning &amp; Tolerancing, datum reference frames, positional tolerances, and tolerance stack-up analysis.</p>
-                    <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Manufacturing &amp; Process</span>
+                    <h3 class="font-display text-2xl font-bold text-white uppercase">Manufacturing & Process</h3>
+                    <ul class="mt-3 space-y-2 text-slate-300 text-sm font-mono">
+                        <li>• Process Validation (IQ/OQ/PQ)</li>
+                        <li>• Injection Molding Optimization</li>
+                        <li>• DFM / DFA & Tooling Design</li>
+                        <li>• FRP Pultrusion & Lamination</li>
+                    </ul>
                 </div>
 
-                <div class="skill-card card-hover glass-panel p-6 rounded-xl border border-industrial-800" data-cat="mfg" data-keywords="8d 5 whys root cause analysis rca non-conformance capa containment">
-                    <div class="w-12 h-12 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4 border border-amber-500/20">
-                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                <!-- Skill Card 2 -->
+                <div class="glass-panel p-6 rounded-xl border border-slate-800 glass-panel-hover transition">
+                    <div class="w-12 h-12 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-chart-line"></i>
                     </div>
-                    <h4 class="text-lg font-bold text-white mb-2">Root Cause Analysis (8D / 5 Whys)</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Executing structured problem solving, Fishbone (Ishikawa) diagrams, 8D containment reports, and CAPA execution.</p>
-                    <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Manufacturing &amp; Process</span>
+                    <h3 class="font-display text-2xl font-bold text-white uppercase">Quality & Lean Systems</h3>
+                    <ul class="mt-3 space-y-2 text-slate-300 text-sm font-mono">
+                        <li>• Root Cause Analysis (8D, 5 Whys)</li>
+                        <li>• Statistical Process Control (SPC)</li>
+                        <li>• Gage R&R & TMV Analysis</li>
+                        <li>• CAPA & NCMR Investigation</li>
+                    </ul>
                 </div>
 
-                <div class="skill-card card-hover glass-panel p-6 rounded-xl border border-industrial-800" data-cat="mfg" data-keywords="process validation iq oq pq cgmp pharmaceutical compliance">
-                    <div class="w-12 h-12 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4 border border-amber-500/20">
-                        <i class="fa-solid fa-file-shield"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-white mb-2">Process Validation (IQ / OQ / PQ)</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Installation, Operational, and Performance Qualification protocol execution adhering strictly to cGMP standards.</p>
-                    <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Manufacturing &amp; Process</span>
-                </div>
-
-                <div class="skill-card card-hover glass-panel p-6 rounded-xl border border-industrial-800" data-cat="mfg" data-keywords="vision systems camera calibration opencv scada mes automation inline inspection">
-                    <div class="w-12 h-12 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4 border border-amber-500/20">
-                        <i class="fa-solid fa-eye"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-white mb-2">Vision Systems Calibration &amp; SCADA/MES</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Camera threshold calibration for continuous inline defect detection, connected to shopfloor SCADA/MES networks.</p>
-                    <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Manufacturing &amp; Process</span>
-                </div>
-
-                <div class="skill-card card-hover glass-panel p-6 rounded-xl border border-industrial-800" data-cat="mfg" data-keywords="injection molding tooling parameters cycle time holding pressure temperature">
-                    <div class="w-12 h-12 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4 border border-amber-500/20">
-                        <i class="fa-solid fa-gears"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-white mb-2">Injection Molding Optimization</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Parameter tuning (hold pressure, mold temperature, cooling cycles) to prevent flash/sink marks and cut cycle times.</p>
-                    <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Manufacturing &amp; Process</span>
-                </div>
-
-                <!-- Category 2: Design & CAD -->
-                <div class="skill-card card-hover glass-panel p-6 rounded-xl border border-industrial-800" data-cat="design" data-keywords="solidworks cswa cswa-sd cswsa parametric 3d cad modeling assembly">
-                    <div class="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl mb-4 border border-cyan-500/20">
+                <!-- Skill Card 3 -->
+                <div class="glass-panel p-6 rounded-xl border border-slate-800 glass-panel-hover transition">
+                    <div class="w-12 h-12 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4">
                         <i class="fa-solid fa-cube"></i>
                     </div>
-                    <h4 class="text-lg font-bold text-white mb-2">SolidWorks (CSWA &amp; CSWA-SD Certified)</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Advanced parametric 3D modeling, mechanical assembly, drawing generation, and sustainable life cycle assessment.</p>
-                    <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Design &amp; CAD</span>
+                    <h3 class="font-display text-2xl font-bold text-white uppercase">CAD & Simulation</h3>
+                    <ul class="mt-3 space-y-2 text-slate-300 text-sm font-mono">
+                        <li>• SolidWorks (CSWA Certified)</li>
+                        <li>• GD&T (ASME Y14.5 Standard)</li>
+                        <li>• ANSYS FEA & Topology Optimization</li>
+                        <li>• AutoCAD & Creo Parametric</li>
+                    </ul>
                 </div>
-
-                <div class="skill-card card-hover glass-panel p-6 rounded-xl border border-industrial-800" data-cat="design" data-keywords="autocad mechanical 2d drafting tooling shopfloor plant layout">
-                    <div class="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl mb-4 border border-cyan-500/20">
-                        <i class="fa-solid fa-drafting-table"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-white mb-2">AutoCAD Mechanical</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Precision 2D technical drafting, fixture layout design, tooling schematics, and standard mechanical symbol libraries.</p>
-                    <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Design &amp; CAD</span>
-                </div>
-
-                <div class="skill-card card-hover glass-panel p-6 rounded-xl border border-industrial-800" data-cat="design" data-keywords="3d printing additive manufacturing rapid prototyping fdm sla tensile test">
-                    <div class="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl mb-4 border border-cyan-500/20">
-                        <i class="fa-solid fa-print"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-white mb-2">3D Printing / Additive Manufacturing</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Rapid prototyping using polymer 3D printers, slicer optimization, infill parameter tuning, and physical load validation.</p>
-                    <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Design &amp; CAD</span>
-                </div>
-
-                <!-- Category 3: Simulation & Controls -->
-                <div class="skill-card card-hover glass-panel p-6 rounded-xl border border-industrial-800" data-cat="sim" data-keywords="matlab simulink control systems state space jacobian feedback robotics kinematics">
-                    <div class="w-12 h-12 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4 border border-emerald-500/20">
-                        <i class="fa-solid fa-code"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-white mb-2">MATLAB &amp; Simulink</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">State-space modeling, Jacobian linearization, full-state feedback design, dynamic control loops, and robotic kinematics.</p>
-                    <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Simulation &amp; Controls</span>
-                </div>
-
-                <div class="skill-card card-hover glass-panel p-6 rounded-xl border border-industrial-800" data-cat="sim" data-keywords="ansys fea stress strain topology optimization structural mesh finite element">
-                    <div class="w-12 h-12 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4 border border-emerald-500/20">
-                        <i class="fa-solid fa-layer-group"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-white mb-2">ANSYS FEA &amp; Topology Optimization</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Structural mesh generation, static load stress analysis, density-based topology optimization, and weight reduction.</p>
-                    <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Simulation &amp; Controls</span>
-                </div>
-
-                <div class="skill-card card-hover glass-panel p-6 rounded-xl border border-industrial-800" data-cat="sim" data-keywords="minitab spc control charts xbar r cp cpk statistics power bi analytics dashboard oee">
-                    <div class="w-12 h-12 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4 border border-emerald-500/20">
-                        <i class="fa-solid fa-chart-pie"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-white mb-2">Minitab (SPC) &amp; Power BI Analytics</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Statistical process control, Cp/Cpk capability studies, X-bar/R control charts, and live OEE dashboards in Power BI.</p>
-                    <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Simulation &amp; Controls</span>
-                </div>
-
             </div>
         </div>
     </section>
 
-    <!-- PROFESSIONAL EXPERIENCE TIMELINE -->
-    <section id="experience" class="py-20 bg-industrial-900/40 border-b border-industrial-800/80">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8">
-            <div class="max-w-3xl mb-12">
-                <h2 class="text-xs font-mono-tech text-cyan-400 uppercase tracking-widest mb-2">// CAREER HISTORY</h2>
-                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Professional Experience</h3>
-                <p class="text-slate-400 mt-3">Practical manufacturing engineering and process optimization roles in India and the US.</p>
+    <!-- Work Experience Timeline -->
+    <section id="experience" class="py-20 border-t border-slate-800 bg-industrial-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">// Career Timeline</span>
+                <h2 class="font-display text-4xl sm:text-5xl font-bold uppercase text-white tracking-wide mt-1">PROFESSIONAL EXPERIENCE</h2>
             </div>
 
-            <div class="relative border-l-2 border-industrial-700 ml-4 md:ml-32 space-y-12">
+            <div class="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:-ml-px before:w-0.5 before:bg-slate-800">
                 
                 <!-- Role 1 -->
-                <div class="relative pl-8 group">
-                    <div class="md:absolute md:-left-36 md:top-1.5 mb-2 md:mb-0 text-xs font-mono-tech text-cyan-400 bg-industrial-900 px-3 py-1 rounded border border-industrial-800 inline-block">
-                        May 2023 – Jul 2024
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-9 h-9 rounded-full border-2 border-cyan-400 bg-industrial-950 text-cyan-400 font-mono text-xs font-bold shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                        01
                     </div>
-
-                    <div class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-cyan-500 border-4 border-industrial-950 group-hover:scale-125 transition-transform"></div>
-
-                    <div class="glass-panel p-6 sm:p-8 rounded-xl border border-industrial-800 card-hover">
-                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] glass-panel p-6 rounded-xl border border-slate-800">
+                        <div class="flex justify-between items-start mb-2">
                             <div>
-                                <h4 class="text-xl font-bold text-white">Manufacturing Engineer – Level 1</h4>
-                                <div class="text-cyan-400 font-medium text-sm">Mylan Laboratories India Pvt Ltd</div>
+                                <h3 class="font-display text-2xl font-bold text-white uppercase">Manufacturing Engineer - Level 1</h3>
+                                <div class="text-cyan-400 font-mono text-xs">Mylan Laboratories India Pvt Ltd | Nashik, India</div>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-mono-tech border border-cyan-500/20">Full-Time</span>
+                            <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded">Nov 2022 - Jul 2024</span>
                         </div>
-
-                        <ul class="space-y-3 text-slate-300 text-sm leading-relaxed mb-6">
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-angle-right text-cyan-400 mt-1 shrink-0"></i>
-                                <span>Calibrated high-speed online packaging vision systems, reducing false reject rate by 18% while maintaining line throughput.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-angle-right text-cyan-400 mt-1 shrink-0"></i>
-                                <span>Led Non-Conformance (NC) investigations using 8D report methodology and 5-Why analysis to address root causes and minimize line downtime.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-angle-right text-cyan-400 mt-1 shrink-0"></i>
-                                <span>Executed Installation, Operational, and Performance Qualification (IQ/OQ/PQ) process validation protocols in compliance with cGMP standards.</span>
-                            </li>
+                        <ul class="space-y-2 text-slate-300 text-sm mt-4 font-sans">
+                            <li>• Calibrated Cognex/Keyence vision systems, improving SMT inspection accuracy by 15% and eliminating 300+ false rejects/month.</li>
+                            <li>• Diagnosed critical defects using 8D, Fishbone, 5 Whys, improving overall OEE by 5%.</li>
+                            <li>• Investigated 30+ NCMRs and implemented CAPAs, delivering $87K in annual scrap savings.</li>
+                            <li>• Redesigned production fixtures using SolidWorks & GD&T, increasing throughput by 80 units/day across 30+ SKUs.</li>
+                            <li>• Validated inspection systems using Gage R&R and TMV in Minitab to ensure FDA compliance.</li>
                         </ul>
-
-                        <div class="flex flex-wrap gap-2 text-xs font-mono-tech text-slate-400 pt-4 border-t border-industrial-800/80">
-                            <span class="px-2.5 py-1 rounded bg-industrial-950 border border-industrial-800">Vision System Calibration</span>
-                            <span class="px-2.5 py-1 rounded bg-industrial-950 border border-industrial-800">8D &amp; 5 Whys RCA</span>
-                            <span class="px-2.5 py-1 rounded bg-industrial-950 border border-industrial-800">IQ/OQ/PQ Validation</span>
-                            <span class="px-2.5 py-1 rounded bg-industrial-950 border border-industrial-800">cGMP Compliance</span>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Role 2 -->
-                <div class="relative pl-8 group">
-                    <div class="md:absolute md:-left-36 md:top-1.5 mb-2 md:mb-0 text-xs font-mono-tech text-amber-400 bg-industrial-900 px-3 py-1 rounded border border-industrial-800 inline-block">
-                        Jan 2022 – Aug 2022
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-9 h-9 rounded-full border-2 border-amber-400 bg-industrial-950 text-amber-400 font-mono text-xs font-bold shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                        02
                     </div>
-
-                    <div class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-amber-500 border-4 border-industrial-950 group-hover:scale-125 transition-transform"></div>
-
-                    <div class="glass-panel p-6 sm:p-8 rounded-xl border border-industrial-800 card-hover">
-                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] glass-panel p-6 rounded-xl border border-slate-800">
+                        <div class="flex justify-between items-start mb-2">
                             <div>
-                                <h4 class="text-xl font-bold text-white">Manufacturing Engineering Intern</h4>
-                                <div class="text-amber-400 font-medium text-sm">Shivkrupa Techno-Plast Ltd</div>
+                                <h3 class="font-display text-2xl font-bold text-white uppercase">Manufacturing Engineering Intern</h3>
+                                <div class="text-amber-400 font-mono text-xs">Shivkrupa Techno-Plast Ltd. | Nashik, India</div>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-mono-tech border border-amber-500/20">Internship</span>
+                            <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded">Jan 2022 - Aug 2022</span>
                         </div>
-
-                        <ul class="space-y-3 text-slate-300 text-sm leading-relaxed mb-6">
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-angle-right text-amber-400 mt-1 shrink-0"></i>
-                                <span>Optimized plastic injection molding process parameters (holding pressures, barrel temperatures, mold cooling times) to achieve a 14% cycle time reduction.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-angle-right text-amber-400 mt-1 shrink-0"></i>
-                                <span>Conducted root cause analysis for defect reduction (flash, short shots, warpage) and standardized work instructions on the shop floor.</span>
-                            </li>
+                        <ul class="space-y-2 text-slate-300 text-sm mt-4 font-sans">
+                            <li>• Monitored 11 injection-molding machines (450T–850T), optimizing process parameters with MATLAB to increase output by 20%.</li>
+                            <li>• Redesigned trimming fixtures and conducted time studies, cutting cycle time by 7 min/unit.</li>
+                            <li>• Evaluated Cp/Cpk capability indices in Minitab across 25+ molds to stabilize dimensional tolerances.</li>
+                            <li>• Executed Layered Process Audits (LPAs) and standardized raw-material mixing SOPs, reducing rework by 25%.</li>
                         </ul>
-
-                        <div class="flex flex-wrap gap-2 text-xs font-mono-tech text-slate-400 pt-4 border-t border-industrial-800/80">
-                            <span class="px-2.5 py-1 rounded bg-industrial-950 border border-industrial-800">Injection Molding</span>
-                            <span class="px-2.5 py-1 rounded bg-industrial-950 border border-industrial-800">Cycle Time Optimization</span>
-                            <span class="px-2.5 py-1 rounded bg-industrial-950 border border-industrial-800">Standardized Work</span>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Role 3 -->
-                <div class="relative pl-8 group">
-                    <div class="md:absolute md:-left-36 md:top-1.5 mb-2 md:mb-0 text-xs font-mono-tech text-slate-400 bg-industrial-900 px-3 py-1 rounded border border-industrial-800 inline-block">
-                        Mar 2021 – Aug 2021
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-9 h-9 rounded-full border-2 border-emerald-400 bg-industrial-950 text-emerald-400 font-mono text-xs font-bold shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                        03
                     </div>
-
-                    <div class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-slate-500 border-4 border-industrial-950 group-hover:scale-125 transition-transform"></div>
-
-                    <div class="glass-panel p-6 sm:p-8 rounded-xl border border-industrial-800 card-hover">
-                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] glass-panel p-6 rounded-xl border border-slate-800">
+                        <div class="flex justify-between items-start mb-2">
                             <div>
-                                <h4 class="text-xl font-bold text-white">Manufacturing Engineering Intern</h4>
-                                <div class="text-slate-300 font-medium text-sm">Adamant Engineering PVT Ltd</div>
+                                <h3 class="font-display text-2xl font-bold text-white uppercase">Manufacturing Engineering Intern</h3>
+                                <div class="text-emerald-400 font-mono text-xs">Adamant Engineering PVT Ltd | Nashik, India</div>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-slate-500/10 text-slate-300 text-xs font-mono-tech border border-slate-500/20">Internship</span>
+                            <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded">Jan 2021 - Aug 2021</span>
                         </div>
-
-                        <ul class="space-y-3 text-slate-300 text-sm leading-relaxed mb-6">
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-angle-right text-slate-400 mt-1 shrink-0"></i>
-                                <span>Assisted in tooling setup, line balancing, and quality inspection on the production line.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-angle-right text-slate-400 mt-1 shrink-0"></i>
-                                <span>Supported process mapping and documentation of operational routines to ensure consistency and continuous improvement.</span>
-                            </li>
+                        <ul class="space-y-2 text-slate-300 text-sm mt-4 font-sans">
+                            <li>• Improved FRP pultrusion stability with ANSYS FEA validation, cutting surface defects by 12%.</li>
+                            <li>• Processed 15+ Engineering Change Requests (ECRs) in SolidWorks/AutoCAD, reducing design-to-production errors by 9%.</li>
+                            <li>• Supported FMEA studies identifying 10+ failure modes to mitigate shop floor quality risks.</li>
                         </ul>
-
-                        <div class="flex flex-wrap gap-2 text-xs font-mono-tech text-slate-400 pt-4 border-t border-industrial-800/80">
-                            <span class="px-2.5 py-1 rounded bg-industrial-950 border border-industrial-800">Tooling Setup</span>
-                            <span class="px-2.5 py-1 rounded bg-industrial-950 border border-industrial-800">Line Balancing</span>
-                            <span class="px-2.5 py-1 rounded bg-industrial-950 border border-industrial-800">Process Mapping</span>
-                        </div>
                     </div>
                 </div>
 
@@ -548,160 +408,89 @@
         </div>
     </section>
 
-    <!-- FEATURED PROJECTS SHOWCASE -->
-    <section id="projects" class="py-20 border-b border-industrial-800/80">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
-                <div>
-                    <h2 class="text-xs font-mono-tech text-cyan-400 uppercase tracking-widest mb-2">// CAPSTONE &amp; RESEARCH</h2>
-                    <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Featured Engineering Projects</h3>
-                </div>
-                <p class="text-slate-400 text-sm max-w-md mt-4 md:mt-0">
-                    Click any project card to open complete technical specifications, software tools, and measurable project outcomes.
-                </p>
+    <!-- Featured Engineering Projects -->
+    <section id="projects" class="py-20 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">// Portfolio Showcase</span>
+                <h2 class="font-display text-4xl sm:text-5xl font-bold uppercase text-white tracking-wide mt-1">FEATURED ENGINEERING PROJECTS</h2>
             </div>
 
-            <!-- Project Category Filter Buttons -->
-            <div class="flex flex-wrap gap-2 mb-8 border-b border-industrial-800 pb-4">
-                <button onclick="filterProjects('all')" class="project-tab-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all bg-cyan-500 text-slate-950 font-bold" data-proj-cat="all">
-                    All Projects
-                </button>
-                <button onclick="filterProjects('mfg')" class="project-tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-industrial-800 text-slate-300 hover:bg-industrial-700" data-proj-cat="mfg">
-                    Manufacturing &amp; Process
-                </button>
-                <button onclick="filterProjects('design')" class="project-tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-industrial-800 text-slate-300 hover:bg-industrial-700" data-proj-cat="design">
-                    Design &amp; FEA
-                </button>
-                <button onclick="filterProjects('auto')" class="project-tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-industrial-800 text-slate-300 hover:bg-industrial-700" data-proj-cat="auto">
-                    Automation &amp; Controls
-                </button>
-            </div>
-
-            <!-- Project Cards Grid -->
-            <div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-2 gap-8">
                 
                 <!-- Project 1 -->
-                <div onclick="openProjectModal(1)" class="project-card card-hover glass-panel rounded-2xl border border-industrial-800 overflow-hidden cursor-pointer group flex flex-col justify-between" data-pcat="mfg auto" data-pkeywords="ai gear conveyor vision scada mes power bi inspection python opencv">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between text-xs font-mono-tech text-slate-400 mb-3">
-                            <span class="text-cyan-400">CAPSTONE PROJECT</span>
-                            <span>Jun 2022 – May 2023</span>
+                <div class="glass-panel p-6 rounded-xl border border-slate-800 glass-panel-hover transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded border border-cyan-500/30">Northeastern University</span>
+                            <span class="text-xs font-mono text-slate-400">Jan 2025 - May 2025</span>
                         </div>
-                        <h4 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors mb-3">
-                            AI-Powered Conveyor System for Gear Quality Analysis
-                        </h4>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4 line-clamp-3">
-                            Automated gear inspection system integrated with vision AI, SCADA/MES connectivity, and real-time Power BI yield analytics.
+                        <h3 class="font-display text-3xl font-bold text-white uppercase">Topology-Optimized C-Clamp</h3>
+                        <p class="text-slate-300 text-sm mt-2">
+                            Structural optimization in ANSYS under 100N static load, reducing part volume to 32.6% while remaining within PLA stress limits. Fabricated via FFF 3D printing within 6g mass constraint and validated through destructive testing up to 0.63 kN.
                         </p>
-                    </div>
-                    <div class="p-6 bg-industrial-900/60 border-t border-industrial-800/80 flex items-center justify-between text-xs">
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="px-2 py-0.5 rounded bg-industrial-950 text-cyan-400 font-mono-tech">Python/OpenCV</span>
-                            <span class="px-2 py-0.5 rounded bg-industrial-950 text-cyan-400 font-mono-tech">SCADA/Power BI</span>
+                        <div class="flex flex-wrap gap-2 mt-4 text-[11px] font-mono text-slate-400">
+                            <span class="bg-slate-800 px-2 py-1 rounded">ANSYS FEA</span>
+                            <span class="bg-slate-800 px-2 py-1 rounded">Topology Optimization</span>
+                            <span class="bg-slate-800 px-2 py-1 rounded">3D Printing / FFF</span>
                         </div>
-                        <span class="text-cyan-400 font-semibold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                            Details <i class="fa-solid fa-arrow-right"></i>
-                        </span>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
-                <div onclick="openProjectModal(2)" class="project-card card-hover glass-panel rounded-2xl border border-industrial-800 overflow-hidden cursor-pointer group flex flex-col justify-between" data-pcat="mfg" data-pkeywords="micro supercapacitors energy storage cmos nano manufacturing research paper northeastern">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between text-xs font-mono-tech text-slate-400 mb-3">
-                            <span class="text-amber-400">RESEARCH PAPER</span>
-                            <span>Dec 2025</span>
+                <div class="glass-panel p-6 rounded-xl border border-slate-800 glass-panel-hover transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-mono text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/30">Northeastern University</span>
+                            <span class="text-xs font-mono text-slate-400">Sep 2024 - Dec 2024</span>
                         </div>
-                        <h4 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors mb-3">
-                            Fabrication &amp; Design of Micro-Supercapacitors for On-Chip Storage
-                        </h4>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4 line-clamp-3">
-                            Author of research paper detailing CMOS-compatible micro-supercapacitor fabrication and micro/nano manufacturing process integration.
+                        <h3 class="font-display text-3xl font-bold text-white uppercase">6-DOF Robotic Arm Manipulation</h3>
+                        <p class="text-slate-300 text-sm mt-2">
+                            Engineered a 6-DOF robotic manipulator in MATLAB for automated object pickup. Implemented inverse kinematics, trajectory planning, and real-time vision feedback via Computer Vision Toolbox image segmentation.
                         </p>
-                    </div>
-                    <div class="p-6 bg-industrial-900/60 border-t border-industrial-800/80 flex items-center justify-between text-xs">
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="px-2 py-0.5 rounded bg-industrial-950 text-amber-400 font-mono-tech">Nanofabrication</span>
-                            <span class="px-2 py-0.5 rounded bg-industrial-950 text-amber-400 font-mono-tech">CMOS</span>
+                        <div class="flex flex-wrap gap-2 mt-4 text-[11px] font-mono text-slate-400">
+                            <span class="bg-slate-800 px-2 py-1 rounded">MATLAB Kinematics</span>
+                            <span class="bg-slate-800 px-2 py-1 rounded">Computer Vision</span>
+                            <span class="bg-slate-800 px-2 py-1 rounded">Robotics</span>
                         </div>
-                        <span class="text-amber-400 font-semibold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                            Details <i class="fa-solid fa-arrow-right"></i>
-                        </span>
                     </div>
                 </div>
 
                 <!-- Project 3 -->
-                <div onclick="openProjectModal(3)" class="project-card card-hover glass-panel rounded-2xl border border-industrial-800 overflow-hidden cursor-pointer group flex flex-col justify-between" data-pcat="design" data-pkeywords="c clamp topology optimization ansys fea 3d printing additive manufacturing destructive testing">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between text-xs font-mono-tech text-slate-400 mb-3">
-                            <span class="text-emerald-400">NORTHEASTERN UNIV</span>
-                            <span>Jan 2025 – May 2025</span>
+                <div class="glass-panel p-6 rounded-xl border border-slate-800 glass-panel-hover transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/30">SPPU Pune</span>
+                            <span class="text-xs font-mono text-slate-400">Jun 2022 - May 2023</span>
                         </div>
-                        <h4 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-3">
-                            Topology-Optimized C-Clamp Design &amp; Additive Manufacturing
-                        </h4>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4 line-clamp-3">
-                            Lightweight C-clamp optimized using ANSYS FEA topology optimization, polymer 3D printed, and validated via physical load testing.
+                        <h3 class="font-display text-3xl font-bold text-white uppercase">AI Conveyor Gear Inspection</h3>
+                        <p class="text-slate-300 text-sm mt-2">
+                            Built an AI-powered automated conveyor quality analysis system for gear inspection, achieving 90%+ defect detection accuracy and reducing false rejects by 15%. Integrated MES/SCADA data into live Power BI dashboards.
                         </p>
-                    </div>
-                    <div class="p-6 bg-industrial-900/60 border-t border-industrial-800/80 flex items-center justify-between text-xs">
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="px-2 py-0.5 rounded bg-industrial-950 text-emerald-400 font-mono-tech">ANSYS FEA</span>
-                            <span class="px-2 py-0.5 rounded bg-industrial-950 text-emerald-400 font-mono-tech">3D Printing</span>
+                        <div class="flex flex-wrap gap-2 mt-4 text-[11px] font-mono text-slate-400">
+                            <span class="bg-slate-800 px-2 py-1 rounded">AI Vision</span>
+                            <span class="bg-slate-800 px-2 py-1 rounded">MES / SCADA</span>
+                            <span class="bg-slate-800 px-2 py-1 rounded">Power BI</span>
                         </div>
-                        <span class="text-emerald-400 font-semibold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                            Details <i class="fa-solid fa-arrow-right"></i>
-                        </span>
                     </div>
                 </div>
 
                 <!-- Project 4 -->
-                <div onclick="openProjectModal(4)" class="project-card card-hover glass-panel rounded-2xl border border-industrial-800 overflow-hidden cursor-pointer group flex flex-col justify-between" data-pcat="auto" data-pkeywords="robotic arm kinematics trajectory matlab computer vision object tracking">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between text-xs font-mono-tech text-slate-400 mb-3">
-                            <span class="text-cyan-400">NORTHEASTERN UNIV</span>
-                            <span>Sep 2024 – Dec 2024</span>
+                <div class="glass-panel p-6 rounded-xl border border-slate-800 glass-panel-hover transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded border border-cyan-500/30">Independent Design</span>
+                            <span class="text-xs font-mono text-slate-400">In Progress</span>
                         </div>
-                        <h4 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors mb-3">
-                            Automated Robotic Arm Manipulation System
-                        </h4>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4 line-clamp-3">
-                            Inverse kinematics, computer vision object tracking, and smooth trajectory planning programmed entirely in MATLAB environment.
+                        <h3 class="font-display text-3xl font-bold text-white uppercase">EV Battery Module Assembly Fixture</h3>
+                        <p class="text-slate-300 text-sm mt-2">
+                            Six-week fixture design and process optimization project focused on automotive battery module alignment, ergonomic clamping tolerances, and quick-change tooling ergonomics.
                         </p>
-                    </div>
-                    <div class="p-6 bg-industrial-900/60 border-t border-industrial-800/80 flex items-center justify-between text-xs">
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="px-2 py-0.5 rounded bg-industrial-950 text-cyan-400 font-mono-tech">MATLAB</span>
-                            <span class="px-2 py-0.5 rounded bg-industrial-950 text-cyan-400 font-mono-tech">Kinematics</span>
+                        <div class="flex flex-wrap gap-2 mt-4 text-[11px] font-mono text-slate-400">
+                            <span class="bg-slate-800 px-2 py-1 rounded">SolidWorks CAD</span>
+                            <span class="bg-slate-800 px-2 py-1 rounded">Automotive Fixturing</span>
+                            <span class="bg-slate-800 px-2 py-1 rounded">Ergonomics</span>
                         </div>
-                        <span class="text-cyan-400 font-semibold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                            Details <i class="fa-solid fa-arrow-right"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Project 5 -->
-                <div onclick="openProjectModal(5)" class="project-card card-hover glass-panel rounded-2xl border border-industrial-800 overflow-hidden cursor-pointer group flex flex-col justify-between" data-pcat="auto" data-pkeywords="segway vehicle dynamics state space jacobian simulink matlab inverted pendulum">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between text-xs font-mono-tech text-slate-400 mb-3">
-                            <span class="text-purple-400">NORTHEASTERN UNIV</span>
-                            <span>Feb 2026 – Apr 2026</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors mb-3">
-                            Nonlinear Control &amp; State-Space Modeling of Segway Dynamics
-                        </h4>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4 line-clamp-3">
-                            Linearization, Jacobian matrix analysis, full-state feedback controller, and inverted pendulum stability simulation in MATLAB/Simulink.
-                        </p>
-                    </div>
-                    <div class="p-6 bg-industrial-900/60 border-t border-industrial-800/80 flex items-center justify-between text-xs">
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="px-2 py-0.5 rounded bg-industrial-950 text-purple-400 font-mono-tech">Simulink</span>
-                            <span class="px-2 py-0.5 rounded bg-industrial-950 text-purple-400 font-mono-tech">State-Space</span>
-                        </div>
-                        <span class="text-purple-400 font-semibold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                            Details <i class="fa-solid fa-arrow-right"></i>
-                        </span>
                     </div>
                 </div>
 
@@ -709,78 +498,83 @@
         </div>
     </section>
 
-    <!-- EDUCATION & CERTIFICATIONS -->
-    <section id="education" class="py-20 bg-industrial-900/30 border-b border-industrial-800/80">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+    <!-- Education & Certifications -->
+    <section id="education" class="py-20 border-t border-slate-800 bg-industrial-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-12">
                 
                 <!-- Education -->
                 <div>
-                    <h2 class="text-xs font-mono-tech text-cyan-400 uppercase tracking-widest mb-2">// ACADEMIC CREDENTIALS</h2>
-                    <h3 class="text-3xl font-extrabold text-white mb-8">Education</h3>
-
+                    <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">// Academic Background</span>
+                    <h2 class="font-display text-4xl font-bold uppercase text-white tracking-wide mt-1 mb-6">EDUCATION</h2>
+                    
                     <div class="space-y-6">
-                        <div class="glass-panel p-6 rounded-xl border border-industrial-800 card-hover">
-                            <div class="flex items-start justify-between">
+                        <div class="glass-panel p-6 rounded-xl border border-slate-800">
+                            <div class="flex justify-between items-start">
                                 <div>
-                                    <h4 class="text-lg font-bold text-white">M.S. in Mechanical Engineering</h4>
-                                    <div class="text-cyan-400 font-medium text-sm">Northeastern University</div>
+                                    <h3 class="font-display text-2xl font-bold text-white uppercase">Master of Science in Mechanical Engineering</h3>
+                                    <div class="text-cyan-400 font-mono text-sm">Northeastern University | Boston, MA</div>
                                 </div>
-                                <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Boston, MA</span>
+                                <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded">Sep 2024 - May 2026</span>
                             </div>
-                            <div class="text-xs font-mono-tech text-slate-400 mt-2">Sep 2024 – May 2026</div>
-                            <p class="text-slate-300 text-sm mt-3 leading-relaxed">
-                                Specialization in dynamic control systems, process validation, topology FEA optimization, and micro/nanoscale additive manufacturing.
-                            </p>
                         </div>
 
-                        <div class="glass-panel p-6 rounded-xl border border-industrial-800 card-hover">
-                            <div class="flex items-start justify-between">
+                        <div class="glass-panel p-6 rounded-xl border border-slate-800">
+                            <div class="flex justify-between items-start">
                                 <div>
-                                    <h4 class="text-lg font-bold text-white">B.E. in Mechanical Engineering</h4>
-                                    <div class="text-slate-300 font-medium text-sm">Savitribai Phule Pune University</div>
+                                    <h3 class="font-display text-2xl font-bold text-white uppercase">Bachelor of Engineering in Mechanical Engineering</h3>
+                                    <div class="text-cyan-400 font-mono text-sm">Savitribai Phule Pune University | Pune, India</div>
                                 </div>
-                                <span class="text-xs font-mono-tech px-2.5 py-1 rounded bg-industrial-800 text-slate-400">Pune, India</span>
+                                <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded">Jul 2019 - May 2023</span>
                             </div>
-                            <div class="text-xs font-mono-tech text-slate-400 mt-2">Jul 2019 – May 2023</div>
-                            <p class="text-slate-300 text-sm mt-3 leading-relaxed">
-                                Core fundamentals in thermodynamics, tooling design, production engineering, and statistical quality control. Capstone in computer vision inspection.
-                            </p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Certifications -->
                 <div>
-                    <h2 class="text-xs font-mono-tech text-amber-400 uppercase tracking-widest mb-2">// INDUSTRY CERTIFICATIONS</h2>
-                    <h3 class="text-3xl font-extrabold text-white mb-8">Certifications</h3>
+                    <span class="text-xs font-mono text-amber-400 uppercase tracking-widest">// Verifiable Credentials</span>
+                    <h2 class="font-display text-4xl font-bold uppercase text-white tracking-wide mt-1 mb-6">CERTIFICATIONS</h2>
 
-                    <div class="space-y-6">
-                        <div class="glass-panel p-6 rounded-xl border border-industrial-800 flex items-start gap-4 card-hover">
-                            <div class="w-12 h-12 rounded-lg bg-red-500/10 text-red-400 flex items-center justify-center text-2xl border border-red-500/20 shrink-0">
-                                <i class="fa-solid fa-cube"></i>
+                    <div class="space-y-4">
+                        <a href="Lean Green Belt Certificatin_Piyush_Bhamare_2.pdf" target="_blank" class="glass-panel p-4 rounded-xl border border-slate-800 flex items-center justify-between hover:border-emerald-500/50 transition group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-ribbon"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white font-bold font-mono text-sm">Certified Lean Green Belt</div>
+                                    <div class="text-xs text-slate-400">IISE (Cert ID: 163758031)</div>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-white">Certified SolidWorks Associate (CSWA)</h4>
-                                <div class="text-xs font-mono-tech text-amber-400 mt-0.5">Dassault Systèmes</div>
-                                <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-                                    Certified proficiency in parametric part modeling, complex assembly creation, engineering drawing conventions, and physical property analysis.
-                                </p>
-                            </div>
-                        </div>
+                            <span class="text-xs font-mono text-emerald-400 group-hover:underline">View PDF <i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
 
-                        <div class="glass-panel p-6 rounded-xl border border-industrial-800 flex items-start gap-4 card-hover">
-                            <div class="w-12 h-12 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl border border-emerald-500/20 shrink-0">
-                                <i class="fa-solid fa-leaf"></i>
+                        <a href="SOLIDWORKS CAD Design Associate_2.pdf" target="_blank" class="glass-panel p-4 rounded-xl border border-slate-800 flex items-center justify-between hover:border-cyan-500/50 transition group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-certificate"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white font-bold font-mono text-sm">Certified SolidWorks Associate (CSWA)</div>
+                                    <div class="text-xs text-slate-400">Dassault Systèmes (Cert ID: C-THG64KMC5N)</div>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-white">Certified SolidWorks Sustainability Associate (CSWA-SD)</h4>
-                                <div class="text-xs font-mono-tech text-emerald-400 mt-0.5">Dassault Systèmes</div>
-                                <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-                                    Verified skills in Sustainable Engineering Principles, Life Cycle Assessments (LCA), material sustainability metrics, and carbon footprint minimization.
-                                </p>
+                            <span class="text-xs font-mono text-cyan-400 group-hover:underline">View PDF <i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+
+                        <a href="SOLIDWORKS Sustainability Associat_Piyush_2.pdf" target="_blank" class="glass-panel p-4 rounded-xl border border-slate-800 flex items-center justify-between hover:border-amber-500/50 transition group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-leaf"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white font-bold font-mono text-sm">SolidWorks Sustainability Associate</div>
+                                    <div class="text-xs text-slate-400">Dassault Systèmes (Cert ID: C-9ATNL7UGQ8)</div>
+                                </div>
                             </div>
-                        </div>
+                            <span class="text-xs font-mono text-amber-400 group-hover:underline">View PDF <i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
                     </div>
                 </div>
 
@@ -788,408 +582,216 @@
         </div>
     </section>
 
-    <!-- FOOTER / CONTACT SECTION -->
-    <footer id="contact" class="py-16 bg-industrial-950 border-t border-industrial-800/80">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8">
-            <div class="grid lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-7 space-y-4">
-                    <h2 class="text-xs font-mono-tech text-cyan-400 uppercase tracking-widest">// GET IN TOUCH</h2>
-                    <h3 class="text-3xl font-extrabold text-white">Let's Connect</h3>
-                    <p class="text-slate-400 text-base leading-relaxed">
-                        Interested in discussing manufacturing engineering roles, process validation projects, or consulting opportunities? I'm based in Boston, MA and available immediately.
-                    </p>
-                    <div class="flex flex-wrap items-center gap-4 pt-2">
-                        <button onclick="copyEmail()" class="px-4 py-2.5 rounded-lg bg-industrial-900 hover:bg-industrial-800 text-cyan-400 border border-cyan-500/30 text-xs font-mono-tech flex items-center gap-2 transition-all">
-                            <i class="fa-solid fa-copy"></i>
-                            <span id="copyBtnText">bhamare.p@northeastern.edu</span>
-                        </button>
-                        <a href="https://linkedin.com" target="_blank" class="p-2.5 rounded-lg bg-industrial-900 text-slate-300 hover:text-cyan-400 border border-industrial-800 transition-colors" title="LinkedIn">
-                            <i class="fa-brands fa-linkedin text-lg"></i>
-                        </a>
-                    </div>
-                </div>
+    <!-- Footer / Let's Build It Right -->
+    <footer class="py-20 border-t border-slate-800 bg-industrial-950 text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 z-10 relative">
+            <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">// Next Steps</span>
+            <h2 class="font-display text-6xl sm:text-7xl font-bold uppercase text-white tracking-wide mt-2">
+                LET'S BUILD IT RIGHT.
+            </h2>
+            <p class="text-slate-400 font-mono text-sm mt-2 max-w-lg mx-auto">
+                Open to Mechanical, Process, and Manufacturing Engineering roles across the United States.
+            </p>
 
-                <div class="lg:col-span-5">
-                    <div class="glass-panel p-6 rounded-xl border border-industrial-800 space-y-4">
-                        <button onclick="openModal('contactModal')" class="w-full py-3.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i>
-                            <span>Send Message via Form</span>
-                        </button>
-                        <button onclick="openModal('resumeModal')" class="w-full py-3 rounded-lg bg-industrial-900 hover:bg-industrial-800 text-slate-200 border border-industrial-700 text-sm font-semibold transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-file-pdf text-amber-400"></i>
-                            <span>View Interactive Resume</span>
-                        </button>
-                    </div>
-                </div>
+            <div class="flex justify-center gap-4 mt-8">
+                <a href="mailto:piyushbhamare2111@gmail.com" class="px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold font-mono text-sm uppercase tracking-wider rounded transition">
+                    Email Me Direct
+                </a>
+                <a href="resume.pdf.pdf" target="_blank" class="px-8 py-4 glass-panel hover:bg-slate-800 text-slate-200 font-mono text-sm rounded transition border border-slate-700">
+                    Download Resume
+                </a>
             </div>
 
-            <div class="mt-12 pt-6 border-t border-industrial-900 text-center text-xs font-mono-tech text-slate-500">
-                &copy; 2026 Piyush Vishwajit Bhamare &bull; Built with HTML, Tailwind CSS &amp; Modern JS
+            <div class="mt-16 pt-8 border-t border-slate-900 text-xs font-mono text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div>© 2026 Piyush Bhamare. All engineering work verified.</div>
+                <div>Boston, MA | +1 (617) 590-0193</div>
             </div>
         </div>
     </footer>
 
-    <!-- MODALS -->
-
-    <!-- PROJECT DETAIL MODAL -->
-    <div id="projectModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-        <div class="glass-panel w-full max-w-3xl rounded-2xl border border-industrial-700 p-6 sm:p-8 max-h-[90vh] overflow-y-auto relative text-slate-200">
-            <button onclick="closeModal('projectModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white text-xl p-2">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div id="projectModalContent">
-                <!-- Injected via JS -->
-            </div>
-        </div>
-    </div>
-
-    <!-- RESUME MODAL -->
-    <div id="resumeModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-        <div class="glass-panel w-full max-w-4xl rounded-2xl border border-industrial-700 p-6 sm:p-8 max-h-[90vh] overflow-y-auto relative text-slate-200">
-            <button onclick="closeModal('resumeModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white text-xl p-2">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            
-            <div class="flex items-center justify-between pb-6 border-b border-industrial-800">
-                <div>
-                    <h3 class="text-2xl font-bold text-white">Piyush Vishwajit Bhamare</h3>
-                    <p class="text-sm text-cyan-400 font-mono-tech">Mechanical &amp; Manufacturing Engineer Resume</p>
-                </div>
-                <button onclick="downloadResume()" class="px-4 py-2 rounded-lg bg-cyan-500 text-slate-950 font-bold text-sm hover:bg-cyan-400 transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-download"></i> Download Text Copy
-                </button>
-            </div>
-
-            <!-- Resume Sheet -->
-            <div class="my-6 p-6 sm:p-8 bg-industrial-950 rounded-xl border border-industrial-800 font-mono-tech text-xs space-y-6 text-slate-300">
-                <div class="text-center border-b border-industrial-800 pb-4 space-y-1">
-                    <div class="text-lg font-bold text-white">PIYUSH VISHWAJIT BHAMARE</div>
-                    <div>Boston, MA | bhamare.p@northeastern.edu</div>
-                </div>
-
-                <div>
-                    <div class="text-cyan-400 font-bold mb-2 uppercase border-b border-industrial-800 pb-1">EDUCATION</div>
-                    <div class="flex justify-between font-semibold text-slate-100">
-                        <span>Northeastern University, Boston, MA</span>
-                        <span>May 2026</span>
-                    </div>
-                    <div class="text-slate-400 italic">M.S. in Mechanical Engineering</div>
-                    
-                    <div class="flex justify-between font-semibold text-slate-100 mt-3">
-                        <span>Savitribai Phule Pune University, India</span>
-                        <span>May 2023</span>
-                    </div>
-                    <div class="text-slate-400 italic">B.E. in Mechanical Engineering</div>
-                </div>
-
-                <div>
-                    <div class="text-cyan-400 font-bold mb-2 uppercase border-b border-industrial-800 pb-1">PROFESSIONAL EXPERIENCE</div>
-                    <div class="space-y-3">
-                        <div>
-                            <div class="flex justify-between text-slate-100 font-semibold">
-                                <span>Mylan Laboratories India Pvt Ltd - Manufacturing Engineer Level 1</span>
-                                <span>2023 - 2024</span>
-                            </div>
-                            <p class="text-slate-400 mt-1">&bull; Calibrated vision systems (18% false reject reduction), led 8D/5-Why RCA, executed IQ/OQ/PQ validation under cGMP.</p>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-slate-100 font-semibold">
-                                <span>Shivkrupa Techno-Plast Ltd - Manufacturing Engineering Intern</span>
-                                <span>2022</span>
-                            </div>
-                            <p class="text-slate-400 mt-1">&bull; Injection molding process parameter optimization, reduced cycle times by 14% and standardized work instructions.</p>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-slate-100 font-semibold">
-                                <span>Adamant Engineering PVT Ltd - Manufacturing Engineering Intern</span>
-                                <span>2021</span>
-                            </div>
-                            <p class="text-slate-400 mt-1">&bull; Tooling setup, line balancing, quality inspection, and shop floor workflow mapping.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="text-cyan-400 font-bold mb-2 uppercase border-b border-industrial-800 pb-1">CERTIFICATIONS &amp; TECHNICAL SKILLS</div>
-                    <div>&bull; Certified SolidWorks Associate (CSWA) &amp; Certified Sustainability Associate (CSWA-SD)</div>
-                    <div>&bull; GD&amp;T, 8D / 5 Whys, Process Validation, SCADA/MES, FEA (ANSYS), MATLAB/Simulink, Minitab, Power BI</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- CONTACT FORM MODAL -->
-    <div id="contactModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-        <div class="glass-panel w-full max-w-lg rounded-2xl border border-industrial-700 p-6 sm:p-8 relative text-slate-200">
-            <button onclick="closeModal('contactModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white text-xl p-2">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <h3 class="text-2xl font-bold text-white mb-1">Send a Message</h3>
-            <p class="text-slate-400 text-sm mb-6">Reach out directly regarding manufacturing or process engineering roles.</p>
-
-            <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-mono-tech text-slate-300 mb-1">YOUR NAME</label>
-                    <input type="text" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-lg bg-industrial-950 border border-industrial-800 text-white focus:outline-none focus:border-cyan-500 text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-mono-tech text-slate-300 mb-1">EMAIL ADDRESS</label>
-                    <input type="email" required placeholder="john@company.com" class="w-full px-4 py-2.5 rounded-lg bg-industrial-950 border border-industrial-800 text-white focus:outline-none focus:border-cyan-500 text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-mono-tech text-slate-300 mb-1">MESSAGE</label>
-                    <textarea rows="4" required placeholder="Hi Piyush, we would like to discuss an opportunity..." class="w-full px-4 py-2.5 rounded-lg bg-industrial-950 border border-industrial-800 text-white focus:outline-none focus:border-cyan-500 text-sm"></textarea>
-                </div>
-                <button type="submit" class="w-full py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-cyan-500/20">
-                    Submit Message
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- JAVASCRIPT -->
+    <!-- Three.js Interactive Scripts -->
     <script>
-        // Toggle Theme
-        function toggleTheme() {
-            document.documentElement.classList.toggle('light');
-        }
+        // -------------------------------------------------------------
+        // 1. THREE.JS MESHIING GEAR TRAIN ANIMATION (HERO CANVAS)
+        // -------------------------------------------------------------
+        const gearContainer = document.getElementById('gear-canvas-container');
+        if (gearContainer) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, gearContainer.clientWidth / gearContainer.clientHeight, 0.1, 1000);
+            camera.position.set(0, 0, 15);
 
-        // Toggle Mobile Menu Drawer
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        }
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(gearContainer.clientWidth, gearContainer.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            gearContainer.appendChild(renderer.domElement);
 
-        // Modal Handlers
-        function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
-        }
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.enableZoom = false;
 
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-        }
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            const dirLight = new THREE.DirectionalLight(0x00f2fe, 1.5);
+            dirLight.position.set(5, 10, 7);
+            scene.add(dirLight);
 
-        // Skill Tab Filtering
-        function filterSkills(category) {
-            const buttons = document.querySelectorAll('.skill-tab-btn');
-            buttons.forEach(btn => {
-                if (btn.getAttribute('data-category') === category) {
-                    btn.className = 'skill-tab-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all bg-cyan-500 text-slate-950 font-bold';
-                } else {
-                    btn.className = 'skill-tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-industrial-800 text-slate-300 hover:bg-industrial-700';
+            // Create Spur Gear Function
+            function createGear(radius, teeth, depth, color) {
+                const group = new THREE.Group();
+                const mat = new THREE.MeshStandardMaterial({
+                    color: color,
+                    metalness: 0.8,
+                    roughness: 0.2,
+                    wireframe: false
+                });
+
+                // Center hub
+                const hubGeo = new THREE.CylinderGeometry(radius * 0.8, radius * 0.8, depth, 32);
+                const hub = new THREE.Mesh(hubGeo, mat);
+                hub.rotation.x = Math.PI / 2;
+                group.add(hub);
+
+                // Teeth
+                for (let i = 0; i < teeth; i++) {
+                    const angle = (i / teeth) * Math.PI * 2;
+                    const toothGeo = new THREE.BoxGeometry(radius * 0.2, radius * 0.3, depth);
+                    const tooth = new THREE.Mesh(toothGeo, mat);
+                    tooth.position.x = Math.cos(angle) * radius;
+                    tooth.position.y = Math.sin(angle) * radius;
+                    tooth.rotation.z = angle;
+                    group.add(tooth);
                 }
-            });
 
-            const cards = document.querySelectorAll('.skill-card');
-            cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-cat') === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Project Category Filtering
-        function filterProjects(pCat) {
-            const buttons = document.querySelectorAll('.project-tab-btn');
-            buttons.forEach(btn => {
-                if (btn.getAttribute('data-proj-cat') === pCat) {
-                    btn.className = 'project-tab-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all bg-cyan-500 text-slate-950 font-bold';
-                } else {
-                    btn.className = 'project-tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-industrial-800 text-slate-300 hover:bg-industrial-700';
-                }
-            });
-
-            const cards = document.querySelectorAll('.project-card');
-            cards.forEach(card => {
-                const cardCats = card.getAttribute('data-pcat').split(' ');
-                if (pCat === 'all' || cardCats.includes(pCat)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Global Dynamic Search across Skills & Projects
-        function handleGlobalSearch() {
-            const query = document.getElementById('globalSearchInput').value.toLowerCase().trim();
-
-            // Search Skill Cards
-            const skillCards = document.querySelectorAll('.skill-card');
-            skillCards.forEach(card => {
-                const text = (card.textContent + ' ' + (card.getAttribute('data-keywords') || '')).toLowerCase();
-                if (text.includes(query)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // Search Project Cards
-            const projectCards = document.querySelectorAll('.project-card');
-            projectCards.forEach(card => {
-                const text = (card.textContent + ' ' + (card.getAttribute('data-pkeywords') || '')).toLowerCase();
-                if (text.includes(query)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Copy Email to Clipboard
-        function copyEmail() {
-            const text = "bhamare.p@northeastern.edu";
-            const dummy = document.createElement("textarea");
-            document.body.appendChild(dummy);
-            dummy.value = text;
-            dummy.select();
-            document.execCommand("copy");
-            document.body.removeChild(dummy);
-
-            const btnText = document.getElementById('copyBtnText');
-            btnText.innerText = "Email Copied!";
-            setTimeout(() => {
-                btnText.innerText = text;
-            }, 2000);
-        }
-
-        // Project Specs Data
-        const projectSpecs = {
-            1: {
-                title: "AI-Powered Conveyor System for Gear Quality Analysis",
-                tag: "CAPSTONE PROJECT (JUN 2022 – MAY 2023)",
-                tools: ["Python", "OpenCV", "SCADA / MES Integration", "Power BI", "SolidWorks"],
-                description: "Automated gear inspection conveyor system combining continuous line vision AI with SCADA shop floor streaming and live yield analytics.",
-                details: [
-                    "Engineered physical conveyor hardware integrated with high-resolution image sensors for inline gear defect analysis.",
-                    "Implemented custom OpenCV computer vision routines for gear tooth alignment, surface flaw detection, and pitch diameter validation.",
-                    "Configured real-time data streaming to SCADA/MES networks and designed live scrap tracking dashboards in Power BI."
-                ],
-                outcomes: "Reduced manual visual inspection time by 65% while maintaining 94.2% automated defect detection accuracy in simulated production runs."
-            },
-            2: {
-                title: "Fabrication & Design of Micro-Supercapacitors for On-Chip Storage",
-                tag: "RESEARCH PAPER | NORTHEASTERN UNIV (DEC 2025)",
-                tools: ["Micro/Nanoscale Manufacturing", "CMOS Integration", "Thin-Film Deposition", "Material Characterization"],
-                description: "Author of research paper on CMOS-compatible micro-supercapacitor fabrication and micro/nano manufacturing process integration for on-chip energy storage.",
-                details: [
-                    "Investigated nanoscale electro-active materials compatible with BEOL (back-end-of-line) CMOS silicon fabrication processes.",
-                    "Modeled interdigital micro-electrode geometric spacing to optimize energy density vs response time.",
-                    "Drafted comprehensive manufacturing workflow guidelines for scalable micro-scale energy harvesting chips."
-                ],
-                outcomes: "Published technical research paper establishing optimal micro-patterning parameters for high power-density micro-supercapacitors."
-            },
-            3: {
-                title: "Topology-Optimized C-Clamp Design & Additive Manufacturing",
-                tag: "NORTHEASTERN UNIV (JAN 2025 – MAY 2025)",
-                tools: ["ANSYS FEA", "SolidWorks", "Additive Manufacturing", "Destructive Testing"],
-                description: "Lightweight C-clamp structural optimization utilizing ANSYS FEA topology algorithms, rapid polymer 3D printing, and mechanical load validation.",
-                details: [
-                    "Performed static structural FEA modeling under peak clamping torque boundary conditions.",
-                    "Applied topology optimization algorithms to strategically remove low-stress material regions while preserving stiffness.",
-                    "3D printed physical prototypes and subjected them to destructive tensile force testing to validate numerical predictions."
-                ],
-                outcomes: "Achieved a 32% weight reduction compared to standard solid baselines while retaining 95% of ultimate clamping load capability."
-            },
-            4: {
-                title: "Automated Robotic Arm Manipulation System",
-                tag: "NORTHEASTERN UNIV (SEP 2024 – DEC 2024)",
-                tools: ["MATLAB", "Robotics Toolbox", "Computer Vision", "Inverse Kinematics"],
-                description: "Multi-axis articulated robotic arm controller designed for inverse kinematics, computer vision object tracking, and smooth trajectory planning.",
-                details: [
-                    "Derived mathematical closed-form inverse kinematics (IK) equations for articulated 3-DOF robot manipulator.",
-                    "Implemented dynamic trajectory smoothing algorithms in MATLAB to eliminate end-effector vibration.",
-                    "Utilized real-time computer vision blob tracking to automatically detect target coordinates for pick-and-place automation."
-                ],
-                outcomes: "Demonstrated sub-millimeter target placement precision during automated pick-and-place trials in MATLAB."
-            },
-            5: {
-                title: "Nonlinear Control & State-Space Modeling of Segway Dynamics",
-                tag: "NORTHEASTERN UNIV (FEB 2026 – APR 2026)",
-                tools: ["MATLAB / Simulink", "State-Space Analysis", "Jacobian Linearization", "Full-State Feedback"],
-                description: "Nonlinear dynamic modeling, Jacobian matrix linearization, full-state feedback controller, and inverted pendulum stability simulation.",
-                details: [
-                    "Formulated full non-linear dynamic equations of motion for a two-wheeled self-balancing vehicle.",
-                    "Derived Jacobian state-space matrices linearized around unstable vertical equilibrium operating points.",
-                    "Designed pole-placement full-state feedback controllers in Simulink for fast disturbance rejection and upright balance control."
-                ],
-                outcomes: "Achieved robust balancing stabilization under step disturbance inputs with zero steady-state tilt error."
+                return group;
             }
-        };
 
-        function openProjectModal(id) {
-            const p = projectSpecs[id];
-            if (!p) return;
+            const gear1 = createGear(3, 16, 0.8, 0x00f2fe);
+            gear1.position.set(-2.5, 0, 0);
+            scene.add(gear1);
 
-            const modalContent = document.getElementById('projectModalContent');
-            modalContent.innerHTML = `
-                <div class="text-xs font-mono-tech text-cyan-400 mb-2">${p.tag}</div>
-                <h3 class="text-2xl font-bold text-white mb-3">${p.title}</h3>
-                <p class="text-slate-300 text-sm mb-6 leading-relaxed">${p.description}</p>
+            const gear2 = createGear(2, 11, 0.8, 0xf59e0b);
+            gear2.position.set(2.4, 0, 0);
+            scene.add(gear2);
 
-                <div class="mb-6">
-                    <div class="text-xs font-mono-tech text-slate-400 uppercase mb-2">SOFTWARE &amp; TOOLS:</div>
-                    <div class="flex flex-wrap gap-2">
-                        ${p.tools.map(t => `<span class="px-2.5 py-1 rounded bg-industrial-950 border border-industrial-800 text-xs font-mono-tech text-cyan-400">${t}</span>`).join('')}
-                    </div>
-                </div>
+            function animateGears() {
+                requestAnimationFrame(animateGears);
+                gear1.rotation.z += 0.01;
+                gear2.rotation.z -= 0.0145; // Reverse meshing ratio
+                controls.update();
+                renderer.render(scene, camera);
+            }
+            animateGears();
 
-                <div class="mb-6">
-                    <div class="text-xs font-mono-tech text-slate-400 uppercase mb-2">METHODOLOGY &amp; HIGHLIGHTS:</div>
-                    <ul class="space-y-2 text-sm text-slate-300">
-                        ${p.details.map(d => `<li class="flex items-start gap-2"><i class="fa-solid fa-angle-right text-cyan-400 mt-1 shrink-0"></i><span>${d}</span></li>`).join('')}
-                    </ul>
-                </div>
-
-                <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm">
-                    <strong class="font-bold">Measurable Outcome:</strong> ${p.outcomes}
-                </div>
-            `;
-
-            openModal('projectModal');
+            window.addEventListener('resize', () => {
+                if (!gearContainer) return;
+                camera.aspect = gearContainer.clientWidth / gearContainer.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(gearContainer.clientWidth, gearContainer.clientHeight);
+            });
         }
 
-        // Contact Form Handling
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            alert("Thank you! Your message has been received. Piyush will get back to you shortly.");
-            closeModal('contactModal');
-            e.target.reset();
+        // -------------------------------------------------------------
+        // 2. THREE.JS 4-STROKE ENGINE CYCLE ANIMATION
+        // -------------------------------------------------------------
+        const engineContainer = document.getElementById('engine-canvas-container');
+        let strokePhase = 'intake';
+        let enginePaused = false;
+        let crankAngle = 0;
+
+        if (engineContainer) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, engineContainer.clientWidth / engineContainer.clientHeight, 0.1, 1000);
+            camera.position.set(0, 2, 12);
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(engineContainer.clientWidth, engineContainer.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            engineContainer.appendChild(renderer.domElement);
+
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+
+            // Lights
+            scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+            const light = new THREE.DirectionalLight(0xffffff, 1.2);
+            light.position.set(5, 10, 10);
+            scene.add(light);
+
+            // Cylinder Bore (Wireframe)
+            const cylGeo = new THREE.CylinderGeometry(2, 2, 6, 32, 1, true);
+            const cylMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, opacity: 0.3, transparent: true });
+            const cylinder = new THREE.Mesh(cylGeo, cylMat);
+            cylinder.position.y = 1;
+            scene.add(cylinder);
+
+            // Piston Head
+            const pistonGeo = new THREE.CylinderGeometry(1.9, 1.9, 1.2, 32);
+            const pistonMat = new THREE.MeshStandardMaterial({ color: 0x00f2fe, metalness: 0.9, roughness: 0.1 });
+            const piston = new THREE.Mesh(pistonGeo, pistonMat);
+            scene.add(piston);
+
+            // Connecting Rod
+            const rodGeo = new THREE.CylinderGeometry(0.2, 0.2, 4, 16);
+            const rodMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.8 });
+            const rod = new THREE.Mesh(rodGeo, rodMat);
+            scene.add(rod);
+
+            function animateEngine() {
+                requestAnimationFrame(animateEngine);
+
+                if (!enginePaused) {
+                    crankAngle += 0.03;
+                    if (crankAngle > Math.PI * 2) crankAngle = 0;
+                }
+
+                // Kinematics calculations
+                const strokeHeight = Math.sin(crankAngle) * 1.8;
+                piston.position.y = 1 + strokeHeight;
+                rod.position.y = piston.position.y - 2;
+
+                const degrees = Math.round((crankAngle / (Math.PI * 2)) * 360);
+                const angleReadout = document.getElementById('crank-angle-readout');
+                if (angleReadout) angleReadout.innerText = degrees + '°';
+
+                controls.update();
+                renderer.render(scene, camera);
+            }
+            animateEngine();
         }
 
-        // Download Text Copy of Resume
-        function downloadResume() {
-            const resumeText = `PIYUSH VISHWAJIT BHAMARE
-Mechanical & Manufacturing Engineer
-Boston, MA | bhamare.p@northeastern.edu
+        function setEngineStroke(phase) {
+            strokePhase = phase;
+            const title = document.getElementById('stroke-title');
+            const desc = document.getElementById('stroke-desc');
 
-EDUCATION:
-- M.S. in Mechanical Engineering, Northeastern University (Sep 2024 - May 2026)
-- B.E. in Mechanical Engineering, Savitribai Phule Pune University (Jul 2019 - May 2023)
+            if (phase === 'intake') {
+                if (title) title.innerText = '1. INTAKE STROKE';
+                if (desc) desc.innerText = 'Intake valve opens. Piston travels downward, drawing fresh air-fuel mixture into cylinder.';
+                crankAngle = Math.PI * 0.5;
+            } else if (phase === 'compression') {
+                if (title) title.innerText = '2. COMPRESSION STROKE';
+                if (desc) desc.innerText = 'Both valves close. Piston ascends, compressing air-fuel charge into combustion chamber.';
+                crankAngle = Math.PI * 1.0;
+            } else if (phase === 'power') {
+                if (title) title.innerText = '3. POWER / COMBUSTION';
+                if (desc) desc.innerText = 'Spark plug ignites mixture. High pressure forces piston down rapidly to drive crankshaft.';
+                crankAngle = Math.PI * 1.5;
+            } else if (phase === 'exhaust') {
+                if (title) title.innerText = '4. EXHAUST STROKE';
+                if (desc) desc.innerText = 'Exhaust valve opens. Ascending piston purges spent combustion gases out of exhaust manifold.';
+                crankAngle = Math.PI * 2.0;
+            }
+        }
 
-EXPERIENCE:
-- Manufacturing Engineer L1 @ Mylan Laboratories (2023 - 2024)
-- Manufacturing Engineering Intern @ Shivkrupa Techno-Plast (2022)
-- Manufacturing Engineering Intern @ Adamant Engineering (2021)
-
-CERTIFICATIONS:
-- Certified SolidWorks Associate (CSWA)
-- Certified SolidWorks Sustainability Associate (CSWA-SD)
-
-CORE SKILLS:
-GD&T, 8D/5 Whys, Process Validation (IQ/OQ/PQ), SCADA/MES, FEA Topology Optimization (ANSYS), Injection Molding, MATLAB/Simulink, Minitab SPC, Power BI.`;
-
-            const element = document.createElement("a");
-            const file = new Blob([resumeText], {type: 'text/plain'});
-            element.href = URL.createObjectURL(file);
-            element.download = "Piyush_Bhamare_Resume.txt";
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
+        function toggleEnginePause() {
+            enginePaused = !enginePaused;
+            const btn = document.getElementById('engine-pause-btn');
+            if (btn) {
+                btn.innerHTML = enginePaused 
+                    ? '<i class="fa-solid fa-play"></i> Resume Cycle' 
+                    : '<i class="fa-solid fa-pause"></i> Pause Cycle';
+            }
         }
     </script>
 </body>
